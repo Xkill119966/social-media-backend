@@ -89,6 +89,12 @@ Run the migration to create the database and tables:
 npm run migrate
 ```
 
+Run the seed to create demo data:
+
+```bash
+npm run seed
+```
+
 ### 6. Start the server
 
 ```bash
@@ -257,6 +263,34 @@ GET /api/posts/my-posts?page=1&limit=10
 Authorization: Bearer {token}
 ```
 
+**Response:**
+
+````json
+{
+  "success": true,
+  "data": {
+    "items": [
+      {
+        "id": 1,
+        "title": "Post Title",
+        "content": "Post content",
+        "image": "image-url.jpg",
+        "created_at": "2023-01-01T00:00:00.000Z",
+        "author_id": 1,
+        "author_name": "John Doe",
+        "reaction_count": 5,
+        "comment_count": 3,
+        "user_has_liked": true
+      }
+    ],
+    "pagination": {
+      "page": 1,
+      "limit": 10,
+      "hasMore": true
+    }
+  }
+}
+
 #### Add Comment to Post
 
 ```http
@@ -267,7 +301,7 @@ Content-Type: application/json
 {
   "content": "This is a comment on the post"
 }
-```
+````
 
 #### Toggle Reaction (Like/Unlike)
 
@@ -276,9 +310,7 @@ POST /api/posts/{postId}/reaction
 Authorization: Bearer {token}
 Content-Type: application/json
 
-{
-  "type": "like"
-}
+
 ```
 
 **Response:**
